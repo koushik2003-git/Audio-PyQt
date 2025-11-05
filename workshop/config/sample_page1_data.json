@@ -1,0 +1,42 @@
+{
+  "company": {
+    "name": "Rising Pharma",
+    "company_type": "Pharmaceutical Manufacturing",
+    "purpose": "To align leadership on a digital-first transformation roadmap focused on R&D acceleration, regulatory agility, and cost optimization across the manufacturing network.",
+    "key_info": [
+      "Founded in 1996 and headquartered in New Jersey, USA.",
+      "Specializes in complex generic and specialty formulations.",
+      "Recent investment in biologics and biosimilar development.",
+      "Planning expansion of API manufacturing in India and the US.",
+      "Facing rising regulatory compliance requirements in both FDA and EMA regions.",
+      "Partnered with Microsoft for digital quality management system (QMS)."
+    ],
+    "objectives": [
+      "Define top three digital transformation priorities for the next 18 months.",
+      "Identify key operational bottlenecks in R&D and manufacturing processes.",
+      "Establish shared metrics for innovation efficiency and compliance readiness.",
+      "Design a leadership communication model for faster decision-making.",
+      "Align teams on cultural change and data-driven accountability."
+    ],
+    "intel": {
+      "latest": "Rising Pharma announced a strategic alliance with BioNxt for biosimilar development in August 2025 and a $20 M automation upgrade of its Hyderabad facility.",
+      "financial": "FY2024 revenue grew 11% YoY to $740 M; R&D spend at 12% of revenue. Cash flow positive with $85 M liquidity. Margins improving from lean manufacturing initiatives.",
+      "competitors": "Primary competitors: Teva Pharmaceuticals (global generics scale), Lupin Ltd. (R&D efficiency), and Zydus Lifesciences (US-focused pipeline acceleration). Rising differentiates through quality compliance and niche formulations.",
+      "extras": [
+        "Recently implemented SAP S/4 HANA for global finance integration.",
+        "Under evaluation for FDA 2025 audit readiness program.",
+        "CEO publicly committed to carbon-neutral manufacturing by 2030."
+      ]
+    }
+  },
+  "people": [
+    {"name": "Dr. Meera Patel", "email": "meera.patel@risingpharma.com", "role": "CEO"},
+    {"name": "Arjun Deshmukh", "email": "arjun.deshmukh@risingpharma.com", "role": "CFO"},
+    {"name": "Lisa Wong", "email": "lisa.wong@risingpharma.com", "role": "CTO"},
+    {"name": "Dr. Ravi Menon", "email": "ravi.menon@risingpharma.com", "role": "CDO"},
+    {"name": "Priya Nair", "email": "priya.nair@risingpharma.com", "role": "COO"},
+    {"name": "Daniel Keller", "email": "daniel.keller@risingpharma.com", "role": "CHRO"},
+    {"name": "Sara Thomas", "email": "sara.thomas@risingpharma.com", "role": "VP / SVP"},
+    {"name": "Vikram Rao", "email": "vikram.rao@risingpharma.com", "role": "Director / Senior Manager"}
+  ]
+}

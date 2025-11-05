@@ -1,0 +1,14 @@
+logging:
+  level: INFO          # or DEBUG / WARNING / ERROR / CRITICAL
+  file: logs/app.log   # can change dynamically to another folder/file
+  max_bytes: 1048576   # 1 MB
+  backup_count: 3      # keep 3 backups
+audio:
+  output_dir: temp_audio  # Directory for intermediate WAV chunks
+  chunk_format: wav
+  rate: 16000
+  chunk_size: 1024
+  duration: 15      # seconds per recording batch
+summarizer:
+  partial_interval: 2   # how often to trigger partial summary
+  partial_window: 2     # how many latest chunks to include
