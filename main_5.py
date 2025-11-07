@@ -2063,20 +2063,71 @@ class WorkshopSetupTab(QWidget):
     def _export_json(self):
         c = self._collect_company()
         questions = []
-        for r in range(self.q_table.rowCount()):
-            questions.append({
-                "category": self.q_table.item(r,0).text() if self.q_table.item(r,0) else "",
-                "role": self.q_table.item(r,1).text() if self.q_table.item(r,1) else None,
-                "text": self.q_table.item(r,2).text() if self.q_table.item(r,2) else "",
-                "response": self.q_table.item(r,3).text() if self.q_table.item(r,3) else "",
-                "score": float(self.q_table.item(r,4).text()) if self.q_table.item(r,4) else 0.0
-            })
-        data = {"company": asdict(c), "question_set":{"approved": self.chk_approve.isChecked(), "questions": questions}}
+
+        # --- Case 1: Using QTableWidget
+        if hasattr(self, "q_table") and self.q_table.isVisible() and self.q_table.rowCount() > 0:
+            for r in range(self.q_table.rowCount()):
+                questions.append({
+                    "category": self.q_table.item(r,0).text() if self.q_table.item(r,0) else "",
+                    "role": self.q_table.item(r,1).text() if self.q_table.item(r,1) else None,
+                    "text": self.q_table.item(r,2).text() if self.q_table.item(r,2) else "",
+                    "response": self.q_table.item(r,3).text() if self.q_table.item(r,3) else "",
+                    "score": float(self.q_table.item(r,4).text()) if self.q_table.item(r,4) else 0.0
+                })
+
+        # --- Case 2: Using Scroll-based CollapsibleQuestion widgets
+        elif hasattr(self, "main_question_scroll"):
+            scroll_widget = self.main_question_scroll.widget()
+            if scroll_widget:
+                for cq in scroll_widget.findChildren(CollapsibleQuestion):
+                    questions.append({
+                        "id": cq.qid,
+                        "category": cq.category,
+                        "role": cq.role,
+                        "text": cq.text_edit.toPlainText().strip(),
+                        "notes": cq.notes_edit.toPlainText().strip(),
+                        "score": cq.score
+                    })
+
+        # --- Assemble final data
+        data = {
+            "company": asdict(c),
+            "question_set": {
+                "approved": self.chk_approve.isChecked() if hasattr(self, "chk_approve") else False,
+                "questions": questions
+            }
+        }
+
         from PyQt6.QtWidgets import QFileDialog
-        path, _ = QFileDialog.getSaveFileName(self, "Save JSON", f"workshop_export_{c.name.replace(' ','_')}.json", "JSON (*.json)")
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Save JSON",
+            f"workshop_export_{c.name.replace(' ', '_')}.json",
+            "JSON (*.json)"
+        )
         if path:
             with open(path, "w", encoding="utf-8") as f:
+                import json
                 json.dump(data, f, ensure_ascii=False, indent=2)
+            QMessageBox.information(self, "Export Complete", f"✅ Saved {len(questions)} questions to:\n{path}")
+
+    
+    # def _export_json(self):
+    #     c = self._collect_company()
+    #     questions = []
+    #     for r in range(self.q_table.rowCount()):
+    #         questions.append({
+    #             "category": self.q_table.item(r,0).text() if self.q_table.item(r,0) else "",
+    #             "role": self.q_table.item(r,1).text() if self.q_table.item(r,1) else None,
+    #             "text": self.q_table.item(r,2).text() if self.q_table.item(r,2) else "",
+    #             "response": self.q_table.item(r,3).text() if self.q_table.item(r,3) else "",
+    #             "score": float(self.q_table.item(r,4).text()) if self.q_table.item(r,4) else 0.0
+    #         })
+    #     data = {"company": asdict(c), "question_set":{"approved": self.chk_approve.isChecked(), "questions": questions}}
+    #     from PyQt6.QtWidgets import QFileDialog
+    #     path, _ = QFileDialog.getSaveFileName(self, "Save JSON", f"workshop_export_{c.name.replace(' ','_')}.json", "JSON (*.json)")
+    #     if path:
+    #         with open(path, "w", encoding="utf-8") as f:
+    #             json.dump(data, f, ensure_ascii=False, indent=2)
 
     def _load_sample(self):
         """Load workshop data from a JSON file instead of hardcoding."""
