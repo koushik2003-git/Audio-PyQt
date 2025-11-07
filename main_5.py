@@ -1884,7 +1884,7 @@ class WorkshopSetupTab(QWidget):
         # === 3️⃣ General Backup ===
         try:
             gb_prompt = (
-                f"Regenerate 10 backup questions for {c.name}  ddd"
+                f"Regenerate 10 backup questions for {c.name}  "
                 f"Focus on {nature}\n"
                 'Return JSON: [{"text":"...","category":"general_backup","role":null,"score":0.0}]'
             )
